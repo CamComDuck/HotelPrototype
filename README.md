@@ -1,6 +1,6 @@
 # Hotel Prototype
 
- Made by: Camden Hovell, 
+ Made by: Camden Hovell, David Case
 
 ## Third-Party Assets
 
