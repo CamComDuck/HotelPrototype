@@ -15,10 +15,15 @@ run/main_scene="res://room_builder/room_builder.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameInfo="*res://GameInfo.gd"
+
 [file_customization]
 
 folder_colors={
 "res://character/": "yellow",
+"res://furniture/": "yellow",
 "res://room_builder/": "orange"
 }
 

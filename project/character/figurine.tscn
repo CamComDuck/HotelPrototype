@@ -6,5 +6,11 @@
 [node name="figurine" instance=ExtResource("1_qu435")]
 script = ExtResource("2_4i3ia")
 
+[node name="arm-left" parent="figurine/root/torso" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.2, 0.2, 5.62298e-09)
+
+[node name="arm-right" parent="figurine/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.2, 0.2, -2.94549e-09)
+
 [node name="AnimationPlayer" parent="." index="1"]
 unique_name_in_owner = true

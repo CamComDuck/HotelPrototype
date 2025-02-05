@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=10 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
 [ext_resource type="PackedScene" uid="uid://dgcbkyv1gcac2" path="res://character/character.tscn" id="2_momfj"]
+[ext_resource type="PackedScene" uid="uid://8s2306vmkwf5" path="res://furniture/furniture.tscn" id="3_sdbeq"]
+[ext_resource type="Resource" uid="uid://cost0hs1vnhik" path="res://furniture/types/toilet.tres" id="4_rm1gh"]
+[ext_resource type="Resource" uid="uid://xhl1av4slyvw" path="res://furniture/types/bed_double.tres" id="5_738do"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,7 +40,15 @@ transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 25, 0, -25)
 shape = SubResource("BoxShape3D_bqaj3")
 
 [node name="Character" parent="." instance=ExtResource("2_momfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.872065, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79735, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.592013, 0.805928, 0, -0.805928, 0.592013, 0, 5, 8)
+transform = Transform3D(1, 0, 0, 0, 0.592013, 0.805928, 0, -0.805928, 0.592013, 0, 20, 25)
+
+[node name="Furniture" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.222, 1.36692, 3.14806)
+furniture_type = ExtResource("4_rm1gh")
+
+[node name="Furniture2" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0391, 1.36692, -5.56426)
+furniture_type = ExtResource("5_738do")
