@@ -26,13 +26,23 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		figurine.play_animation("idle")
 	
-	if (direction.x > 0 and direction.z > 0) or (direction.x < 0 and direction.z < 0):
+	# If you have a better way to make him face the right direction,
+	# PLEASE refactor this lol
+	if direction.x > 0 and direction.z > 0:
 		figurine.rotation_degrees.y = 45
-	elif (direction.x < 0 and direction.z > 0) or (direction.x > 0 and direction.z < 0):
+	elif direction.x < 0 and direction.z < 0:
+		figurine.rotation_degrees.y = -135
+	elif direction.x < 0 and direction.z > 0:
 		figurine.rotation_degrees.y = -45
-	elif direction.x != 0:
-		figurine.rotation_degrees.y = 90
-	elif direction.z != 0:
+	elif direction.x > 0 and direction.z < 0:
+		figurine.rotation_degrees.y = 135
+	elif direction.z == -1 and direction.x == 0:
+		figurine.rotation_degrees.y = 180
+	elif direction.z == 1 and direction.x == 0:
 		figurine.rotation_degrees.y = 0
+	elif direction.z == 0 and direction.x == -1:
+		figurine.rotation_degrees.y = -90
+	elif direction.z == 0 and direction.x == 1:
+		figurine.rotation_degrees.y = 90
 
 	move_and_slide()
