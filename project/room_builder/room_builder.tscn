@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbw1tk7vh0mdi"]
+
+[ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
+[ext_resource type="PackedScene" uid="uid://dgcbkyv1gcac2" path="res://character/character.tscn" id="2_momfj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_grmn7"]
+sky_material = SubResource("ProceduralSkyMaterial_2odo8")
+
+[sub_resource type="Environment" id="Environment_105ws"]
+background_mode = 2
+sky = SubResource("Sky_grmn7")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bqaj3"]
+size = Vector3(50, 1, 50)
+
+[node name="RoomBuilder" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_105ws")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="floorFull" parent="Floor" instance=ExtResource("1_2stwj")]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 25, 0, -25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_bqaj3")
+
+[node name="Character" parent="." instance=ExtResource("2_momfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.872065, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.592013, 0.805928, 0, -0.805928, 0.592013, 0, 5, 8)

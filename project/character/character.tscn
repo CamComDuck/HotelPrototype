@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgcbkyv1gcac2"]
+
+[ext_resource type="Script" path="res://character/character.gd" id="1_koq2w"]
+[ext_resource type="PackedScene" uid="uid://dpnoqcpxmi8n0" path="res://Prototype Kit/figurine.fbx" id="2_bn1yr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hatge"]
+radius = 0.3
+height = 0.6
+
+[node name="Character" type="CharacterBody3D"]
+script = ExtResource("1_koq2w")
+
+[node name="figurine" parent="." instance=ExtResource("2_bn1yr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CapsuleShape3D_hatge")
