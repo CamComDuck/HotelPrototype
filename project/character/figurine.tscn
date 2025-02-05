@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://5jhrsea16t41"]
+[gd_scene load_steps=3 format=3 uid="uid://5jhrsea16t41"]
 
 [ext_resource type="PackedScene" uid="uid://dpnoqcpxmi8n0" path="res://Prototype Kit/figurine.fbx" id="1_qu435"]
+[ext_resource type="Script" path="res://character/figurine.gd" id="2_4i3ia"]
 
 [node name="figurine" instance=ExtResource("1_qu435")]
+script = ExtResource("2_4i3ia")
+
+[node name="AnimationPlayer" parent="." index="1"]
+unique_name_in_owner = true
