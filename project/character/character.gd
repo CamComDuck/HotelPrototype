@@ -1,11 +1,12 @@
 class_name Character
 extends CharacterBody3D
 
-signal furniture_placed (furniture_placed : Furniture, position_placed : Vector3)
+signal furniture_placed (furniture_placed : FurnitureType, position_placed : Vector3)
 
 const SPEED := 20.0
 
 var interacting_furniture : Furniture
+var carrying_furniture : FurnitureType
 var last_direction : Vector3
 var allow_movement := true
 
@@ -25,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		interacting_furniture = null
 	
 	if Input.is_action_just_pressed("interact"):
-		if interacting_furniture != null: 
+		if interacting_furniture != null and carrying_furniture == null: 
 			figurine.play_animation("pick-up")
 			allow_movement = false
 			await figurine.animation_finished
@@ -36,6 +37,8 @@ func _physics_process(delta: float) -> void:
 			hand_model.scale = Vector3(0.5, 0.5, 0.5)
 			carrying_marker.add_child(hand_model)
 			figurine.play_animation("holding-both")
+			
+			carrying_furniture = interacting_furniture.furniture_type
 			interacting_furniture.queue_free()
 			interacting_furniture = null
 		
@@ -45,9 +48,10 @@ func _physics_process(delta: float) -> void:
 			await figurine.animation_finished
 			
 			# Put furniture down
-			furniture_placed.emit(carrying_marker.get_child(0), global_position)
+			furniture_placed.emit(carrying_furniture, global_position)
 			carrying_marker.get_child(0).queue_free()
 			allow_movement = true
+			carrying_furniture = null
 
 
 func handle_movement(delta : float) -> void:

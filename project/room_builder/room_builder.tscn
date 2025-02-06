@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=16 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
+[ext_resource type="Script" path="res://room_builder/room_builder.gd" id="1_rgx25"]
 [ext_resource type="PackedScene" uid="uid://dgcbkyv1gcac2" path="res://character/character.tscn" id="2_momfj"]
 [ext_resource type="PackedScene" uid="uid://8s2306vmkwf5" path="res://furniture/furniture.tscn" id="3_sdbeq"]
 [ext_resource type="Resource" uid="uid://cost0hs1vnhik" path="res://furniture/types/toilet.tres" id="4_rm1gh"]
@@ -28,6 +29,7 @@ glow_enabled = true
 size = Vector3(120, 1, 145)
 
 [node name="RoomBuilder" type="Node3D"]
+script = ExtResource("1_rgx25")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_105ws")
@@ -77,3 +79,5 @@ furniture_type = ExtResource("7_0ehly")
 [node name="Furniture5" parent="." instance=ExtResource("3_sdbeq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2937, 1.36692, -15.0371)
 furniture_type = ExtResource("8_lgmat")
+
+[connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
