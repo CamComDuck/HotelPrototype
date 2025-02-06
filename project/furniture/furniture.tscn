@@ -14,8 +14,7 @@ shape = SubResource("BoxShape3D_ogslf")
 [node name="PriceLabel" type="Label3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85835, 0)
-pixel_size = 0.015
 billboard = 1
 text = "$1000"
-font_size = 250
-outline_size = 50
+font_size = 600
+outline_size = 127

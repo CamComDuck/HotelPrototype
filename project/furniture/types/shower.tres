@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FurnitureType" load_steps=2 format=3 uid="uid://cieulahri8b0c"]
+
+[ext_resource type="Script" path="res://furniture/types/furniture_type.gd" id="1_ycg1u"]
+
+[resource]
+script = ExtResource("1_ycg1u")
+name = "Shower"
+category = "Bathroom"
+price = 250
+model_path = "res://Furniture Kit/showerRound.fbx"
+tiles_length = 1
+tiles_width = 1

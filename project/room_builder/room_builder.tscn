@@ -1,10 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=15 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
 [ext_resource type="PackedScene" uid="uid://dgcbkyv1gcac2" path="res://character/character.tscn" id="2_momfj"]
 [ext_resource type="PackedScene" uid="uid://8s2306vmkwf5" path="res://furniture/furniture.tscn" id="3_sdbeq"]
 [ext_resource type="Resource" uid="uid://cost0hs1vnhik" path="res://furniture/types/toilet.tres" id="4_rm1gh"]
 [ext_resource type="Resource" uid="uid://xhl1av4slyvw" path="res://furniture/types/bed_double.tres" id="5_738do"]
+[ext_resource type="Resource" uid="uid://cieulahri8b0c" path="res://furniture/types/shower.tres" id="5_vgsup"]
+[ext_resource type="Resource" uid="uid://dmm40jphkq622" path="res://furniture/types/bed_bunk.tres" id="6_im1rv"]
+[ext_resource type="Resource" uid="uid://dvko1y2ccg36a" path="res://furniture/types/chair_desk.tres" id="7_0ehly"]
+[ext_resource type="Resource" uid="uid://osi403f6j0oo" path="res://furniture/types/bathtub.tres" id="7_p7hpa"]
+[ext_resource type="Resource" uid="uid://bhcx8h1lxlpld" path="res://furniture/types/lamp_floor.tres" id="8_lgmat"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -49,6 +54,26 @@ transform = Transform3D(1, 0, 0, 0, 0.592013, 0.805928, 0, -0.805928, 0.592013, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.222, 1.36692, 3.14806)
 furniture_type = ExtResource("4_rm1gh")
 
+[node name="Furniture7" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1764, 1.36692, 3.14806)
+furniture_type = ExtResource("5_vgsup")
+
 [node name="Furniture2" parent="." instance=ExtResource("3_sdbeq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0391, 1.36692, -5.56426)
 furniture_type = ExtResource("5_738do")
+
+[node name="Furniture3" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0391, 1.36692, 20.4619)
+furniture_type = ExtResource("6_im1rv")
+
+[node name="Furniture6" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.844, 1.36692, 20.4619)
+furniture_type = ExtResource("7_p7hpa")
+
+[node name="Furniture4" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2937, 1.36692, 20.4619)
+furniture_type = ExtResource("7_0ehly")
+
+[node name="Furniture5" parent="." instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2937, 1.36692, -15.0371)
+furniture_type = ExtResource("8_lgmat")

@@ -23,5 +23,6 @@ func _ready() -> void:
 	collision_shape.position.y = collision_shape.shape.size.y / 2.0
 	
 	price_label.position.x = -1 * collision_shape.shape.size.x / 2.0
-	#price_label.position.z = collision_shape.shape.size.z / 2.0
+	#price_label.position.z = (-1 * collision_shape.shape.size.z) + (collision_shape.shape.size.z / 2.0)
+	price_label.position.z = -3
 	price_label.position.y = collision_shape.shape.size.y / 2.0
