@@ -3,12 +3,14 @@ extends StaticBody3D
 
 @export var furniture_type : FurnitureType
 
+var model : Node3D
+
 @onready var collision_shape := %CollisionShape as CollisionShape3D
 @onready var price_label := %PriceLabel as Label3D
 
 
 func _ready() -> void:
-	var model := load(furniture_type.model_path).instantiate() as Node3D
+	model = load(furniture_type.model_path).instantiate() as Node3D
 	add_child(model) 
 	
 	price_label.text = "$" + str(furniture_type.price)
