@@ -4,10 +4,14 @@ extends StaticBody3D
 @export var furniture_type : FurnitureType
 
 @onready var collision_shape := %CollisionShape as CollisionShape3D
+@onready var price_label := %PriceLabel as Label3D
+
 
 func _ready() -> void:
 	var model := load(furniture_type.model_path).instantiate() as Node3D
 	add_child(model) 
+	
+	price_label.text = "$" + str(furniture_type.price)
 	
 	rotation_degrees.y = 180
 	
@@ -17,3 +21,7 @@ func _ready() -> void:
 	collision_shape.position.x = -1 * collision_shape.shape.size.x / 2.0
 	collision_shape.position.z = collision_shape.shape.size.z / 2.0
 	collision_shape.position.y = collision_shape.shape.size.y / 2.0
+	
+	price_label.position.x = -1 * collision_shape.shape.size.x / 2.0
+	#price_label.position.z = collision_shape.shape.size.z / 2.0
+	price_label.position.y = collision_shape.shape.size.y / 2.0
