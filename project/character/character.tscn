@@ -22,9 +22,9 @@ shape = SubResource("CapsuleShape3D_hatge")
 unique_name_in_owner = true
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
-[node name="CarryingMarker" type="Marker3D" parent="."]
+[node name="CarryingMarker" type="Marker3D" parent="Figurine"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.08687, 2.71349)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.1, 0.408687, 0.271349)
 gizmo_extents = 1.0
 
 [node name="ShapeCast" type="ShapeCast3D" parent="."]

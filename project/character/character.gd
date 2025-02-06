@@ -1,10 +1,13 @@
 class_name Character
 extends CharacterBody3D
 
+signal furniture_placed (furniture_placed : Furniture, position_placed : Vector3)
+
 const SPEED := 20.0
 
 var interacting_furniture : Furniture
 var last_direction : Vector3
+var allow_movement := true
 
 @onready var figurine := %Figurine as Figurine
 @onready var carrying_marker := %CarryingMarker as Marker3D
@@ -12,7 +15,8 @@ var last_direction : Vector3
 
 
 func _physics_process(delta: float) -> void:
-	handle_movement(delta)
+	if allow_movement:
+		handle_movement(delta)
 	
 	if shape_cast.is_colliding():
 		if shape_cast.get_collider(0) is Furniture:
@@ -20,8 +24,30 @@ func _physics_process(delta: float) -> void:
 	else:
 		interacting_furniture = null
 	
-	if interacting_furniture != null:
-		print(interacting_furniture.furniture_type.name)
+	if Input.is_action_just_pressed("interact"):
+		if interacting_furniture != null: 
+			figurine.play_animation("pick-up")
+			allow_movement = false
+			await figurine.animation_finished
+			
+			# Pick up furniture
+			allow_movement = true
+			var hand_model := interacting_furniture.model.duplicate()
+			hand_model.scale = Vector3(0.5, 0.5, 0.5)
+			carrying_marker.add_child(hand_model)
+			figurine.play_animation("holding-both")
+			interacting_furniture.queue_free()
+			interacting_furniture = null
+		
+		elif carrying_marker.get_child_count() > 0:
+			figurine.play_animation("pick-up")
+			allow_movement = false
+			await figurine.animation_finished
+			
+			# Put furniture down
+			furniture_placed.emit(carrying_marker.get_child(0), global_position)
+			carrying_marker.get_child(0).queue_free()
+			allow_movement = true
 
 
 func handle_movement(delta : float) -> void:
@@ -37,12 +63,14 @@ func handle_movement(delta : float) -> void:
 	if direction != Vector3.ZERO:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		figurine.play_animation("walk")
+		if carrying_marker.get_child_count() == 0:
+			figurine.play_animation("walk")
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		figurine.play_animation("idle")
+		if carrying_marker.get_child_count() == 0:
+			figurine.play_animation("idle")
 		
 	if direction != Vector3.ZERO:
 		last_direction = direction
@@ -53,21 +81,21 @@ func handle_movement(delta : float) -> void:
 	
 	# If you have a better way to make him face the right direction,
 	# PLEASE refactor this lol
-	if direction.x > 0 and direction.z > 0:
+	if last_direction.x > 0 and last_direction.z > 0:
 		figurine.rotation_degrees.y = 45
-	elif direction.x < 0 and direction.z < 0:
+	elif last_direction.x < 0 and last_direction.z < 0:
 		figurine.rotation_degrees.y = -135
-	elif direction.x < 0 and direction.z > 0:
+	elif last_direction.x < 0 and last_direction.z > 0:
 		figurine.rotation_degrees.y = -45
-	elif direction.x > 0 and direction.z < 0:
+	elif last_direction.x > 0 and last_direction.z < 0:
 		figurine.rotation_degrees.y = 135
-	elif direction.z == -1 and direction.x == 0:
+	elif last_direction.z == -1 and last_direction.x == 0:
 		figurine.rotation_degrees.y = 180
-	elif direction.z == 1 and direction.x == 0:
+	elif last_direction.z == 1 and last_direction.x == 0:
 		figurine.rotation_degrees.y = 0
-	elif direction.z == 0 and direction.x == -1:
+	elif last_direction.z == 0 and last_direction.x == -1:
 		figurine.rotation_degrees.y = -90
-	elif direction.z == 0 and direction.x == 1:
+	elif last_direction.z == 0 and last_direction.x == 1:
 		figurine.rotation_degrees.y = 90
 
 	move_and_slide()
