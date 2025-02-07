@@ -1,16 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://8s2306vmkwf5"]
+[gd_scene load_steps=3 format=3 uid="uid://8s2306vmkwf5"]
 
 [ext_resource type="Script" path="res://furniture/furniture.gd" id="1_2iu03"]
-[ext_resource type="PackedScene" uid="uid://bhwunkrys6rcg" path="res://Furniture Kit/plantSmall2.fbx" id="2_el26s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ogslf"]
 
 [node name="Furniture" type="StaticBody3D"]
 script = ExtResource("1_2iu03")
-
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
-unique_name_in_owner = true
-shape = SubResource("BoxShape3D_ogslf")
 
 [node name="PriceLabel" type="Label3D" parent="."]
 unique_name_in_owner = true
@@ -20,4 +15,6 @@ text = "$1000"
 font_size = 600
 outline_size = 127
 
-[node name="plantSmall2" parent="." instance=ExtResource("2_el26s")]
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_ogslf")

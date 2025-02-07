@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		interacting_furniture = null
 	
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact_primary"):
 		if interacting_furniture != null and carrying_furniture == null: 
 			figurine.play_animation("pick-up")
 			allow_movement = false
@@ -52,7 +52,11 @@ func _physics_process(delta: float) -> void:
 			carrying_marker.get_child(0).queue_free()
 			allow_movement = true
 			carrying_furniture = null
-
+		
+	elif Input.is_action_just_pressed("interact_secondary"):
+		if interacting_furniture != null and carrying_furniture == null: 
+			interacting_furniture.rotation_degrees.y += 90
+	
 
 func handle_movement(delta : float) -> void:
 	# Add the gravity.
