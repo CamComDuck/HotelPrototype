@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpvgdt2vvt7el"]
+
+[ext_resource type="Script" path="res://room_builder/tile.gd" id="1_iff7b"]
+[ext_resource type="PackedScene" uid="uid://dhk85gci5u1ep" path="res://Prototype Kit/floor-square.fbx" id="2_wqw0k"]
+[ext_resource type="PackedScene" uid="uid://b00wrwjmofsvx" path="res://Prototype Kit/indicator-square-b.fbx" id="3_msmx1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wugo0"]
+size = Vector3(10, 1, 10)
+
+[node name="Tile" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_iff7b")
+
+[node name="floor-square" parent="." instance=ExtResource("2_wqw0k")]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="indicator" parent="." instance=ExtResource("3_msmx1")]
+unique_name_in_owner = true
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 10, 0, 0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_wugo0")
+
+[node name="FurnitureMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195218, 0)
+gizmo_extents = 5.0

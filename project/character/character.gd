@@ -8,6 +8,7 @@ const SPEED := 20.0
 
 var interacting_furniture : Furniture
 var carrying_furniture : Furniture
+var current_tile : Tile
 var last_direction : Vector3
 var allow_movement := true
 
@@ -20,12 +21,23 @@ var allow_movement := true
 func _physics_process(delta: float) -> void:
 	if allow_movement:
 		handle_movement(delta)
+		
+	print(current_tile)
 
 	if shape_cast.is_colliding():
 		if shape_cast.get_collider(0) is Furniture:
 			interacting_furniture = shape_cast.get_collider(0)
+		elif shape_cast.get_collider(0) is Tile and carrying_furniture != null:
+			if not shape_cast.get_collider(0).has_furniture:
+				if current_tile != shape_cast.get_collider(0) and current_tile != null:
+					current_tile.toggle_indicator(false)
+				current_tile = shape_cast.get_collider(0)
+				current_tile.toggle_indicator(true)
 	else:
 		interacting_furniture = null
+		if current_tile != null:
+			current_tile.toggle_indicator(false)
+			current_tile = null
 
 	if Input.is_action_just_pressed("interact_primary"):
 		if interacting_furniture != null and carrying_furniture == null: 

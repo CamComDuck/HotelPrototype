@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=19 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
 [ext_resource type="Script" path="res://room_builder/room_builder.gd" id="1_rgx25"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://cieulahri8b0c" path="res://furniture/types/shower.tres" id="5_vgsup"]
 [ext_resource type="Resource" uid="uid://osi403f6j0oo" path="res://furniture/types/bathtub.tres" id="7_p7hpa"]
 [ext_resource type="AudioStream" uid="uid://dpn41ia4c0xjh" path="res://music/Casual - Store (Loop_01).wav" id="8_edarg"]
+[ext_resource type="AudioStream" uid="uid://c2dix1qes0vmp" path="res://sounds/purchase/coins.wav" id="8_o6cl5"]
+[ext_resource type="PackedScene" uid="uid://dpvgdt2vvt7el" path="res://room_builder/tile.tscn" id="10_l3nbf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -56,7 +58,7 @@ transform = Transform3D(11.5, 0, 0, 0, 1, 0, 0, 0, 11.5, 60, 0, -70)
 shape = SubResource("BoxShape3D_bqaj3")
 
 [node name="Character" parent="." instance=ExtResource("2_momfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79735, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.4521, 1.79735, 15.2325)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.592013, 0.805928, 0, -0.805928, 0.592013, 2.5, 50, 49.895)
@@ -129,13 +131,67 @@ Placed"
 font_size = 600
 outline_size = 127
 
+[node name="PurchaseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_o6cl5")
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_edarg")
-volume_db = -2.5
+volume_db = -20.0
 autoplay = true
+
+[node name="Tiles" type="Node3D" parent="."]
+
+[node name="Tile1" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67452, 0)
+
+[node name="Tile2" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675, 10)
+
+[node name="Tile3" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.67452, 0)
+
+[node name="Tile4" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.675, 10)
+
+[node name="Tile5" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.67452, 0)
+
+[node name="Tile6" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.675, 10)
+
+[node name="Tile7" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.67452, 0)
+
+[node name="Tile8" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.675, 10)
+
+[node name="Tile9" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67452, -20)
+
+[node name="Tile10" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675, -10)
+
+[node name="Tile11" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.67452, -20)
+
+[node name="Tile12" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.675, -10)
+
+[node name="Tile13" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.67452, -20)
+
+[node name="Tile14" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.675, -10)
+
+[node name="Tile15" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.67452, -20)
+
+[node name="Tile16" parent="Tiles" instance=ExtResource("10_l3nbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.675, -10)
 
 [connection signal="deleting_furniture" from="Character" to="." method="_on_character_deleting_furniture"]
 [connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
 [connection signal="body_entered" from="PurchaseBathroom" to="." method="_on_purchase_square_body_entered"]
 [connection signal="body_exited" from="BathroomFurnitures" to="." method="_on_purchase_bathroom_body_exited"]
 [connection signal="body_entered" from="PurchaseFurnitures" to="." method="_on_purchase_furnitures_body_entered"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]

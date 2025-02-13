@@ -72,6 +72,7 @@ func _on_purchase_furnitures_body_entered(body: Node3D) -> void:
 				print("Money Left: $" + str(money))
 				print()
 			print("Now going to Hotel scene [Prototype Ends Here]")
+			$PurchaseSound.play()
 			
 		else:
 			print("No furniture items to buy")
@@ -80,3 +81,7 @@ func _on_purchase_furnitures_body_entered(body: Node3D) -> void:
 
 func _on_character_deleting_furniture(furniture_deleted: Furniture) -> void:
 	placed_furnitures.erase(furniture_deleted)
+
+
+func _on_background_music_finished() -> void:
+	$BackgroundMusic.play()

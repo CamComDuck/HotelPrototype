@@ -11,7 +11,7 @@ height = 8.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2pw6n"]
 radius = 1.5
-height = 5.0
+height = 8.0
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_koq2w")
@@ -35,14 +35,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 shape = SubResource("CapsuleShape3D_2pw6n")
 target_position = Vector3(0, 0, 0)
 max_results = 1
+collision_mask = 2
+collide_with_areas = true
 debug_shape_custom_color = Color(0.929412, 0.988235, 0, 1)
 
 [node name="PickUpSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_x764o")
-volume_db = 10.0
+volume_db = 20.0
 max_db = 6.0
 
 [node name="PlaceSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_npycy")
-volume_db = 5.0
+volume_db = 20.0
 max_db = 5.0

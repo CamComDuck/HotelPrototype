@@ -5,6 +5,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_ogslf"]
 
 [node name="Furniture" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_2iu03")
 
 [node name="PriceLabel" type="Label3D" parent="."]
