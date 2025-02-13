@@ -23,5 +23,5 @@ transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 10, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_wugo0")
 
 [node name="FurnitureMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195218, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.2, 2.5)
 gizmo_extents = 5.0

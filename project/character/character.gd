@@ -1,7 +1,7 @@
 class_name Character
 extends CharacterBody3D
 
-signal furniture_placed (furniture_placed : Furniture, position_placed : Vector3)
+signal furniture_placed (furniture_placed : Furniture, tile_placed_on : Tile)
 signal deleting_furniture (furniture_deleted : Furniture)
 
 const SPEED := 20.0
@@ -21,18 +21,18 @@ var allow_movement := true
 func _physics_process(delta: float) -> void:
 	if allow_movement:
 		handle_movement(delta)
-		
-	print(current_tile)
 
 	if shape_cast.is_colliding():
 		if shape_cast.get_collider(0) is Furniture:
 			interacting_furniture = shape_cast.get_collider(0)
-		elif shape_cast.get_collider(0) is Tile and carrying_furniture != null:
-			if not shape_cast.get_collider(0).has_furniture:
+		elif shape_cast.get_collider(0) is Tile:
+			if shape_cast.get_collider(0).furniture_on_tile == null:
 				if current_tile != shape_cast.get_collider(0) and current_tile != null:
 					current_tile.toggle_indicator(false)
 				current_tile = shape_cast.get_collider(0)
 				current_tile.toggle_indicator(true)
+			elif shape_cast.get_collider(0).furniture_on_tile != null:
+				interacting_furniture = shape_cast.get_collider(0).furniture_on_tile
 	else:
 		interacting_furniture = null
 		if current_tile != null:
@@ -49,6 +49,9 @@ func _physics_process(delta: float) -> void:
 
 			# Pick up furniture
 			allow_movement = true
+			if current_tile != null:
+				if current_tile.furniture_on_tile != null:
+					current_tile.furniture_on_tile = null
 			var hand_model := interacting_furniture.model.duplicate()
 			hand_model.scale = Vector3(0.5, 0.5, 0.5)
 			carrying_marker.add_child(hand_model)
@@ -62,21 +65,21 @@ func _physics_process(delta: float) -> void:
 			carrying_furniture.is_infinite = false
 			interacting_furniture = null
 
-		elif carrying_marker.get_child_count() > 0:
+		elif carrying_marker.get_child_count() > 0 and current_tile != null:
 			figurine.play_animation("pick-up")
 			allow_movement = false
 			await figurine.animation_finished
 			place_sound.play()
 
 			# Put furniture down
-			furniture_placed.emit(carrying_furniture, global_position)
+			furniture_placed.emit(carrying_furniture, current_tile)
 			carrying_marker.get_child(0).queue_free()
 			allow_movement = true
 			carrying_furniture = null
 
-	elif Input.is_action_just_pressed("interact_secondary"):
-		if interacting_furniture != null and carrying_furniture == null: 
-			interacting_furniture.rotation_degrees.y += 90
+	#elif Input.is_action_just_pressed("interact_secondary"):
+		#if interacting_furniture != null and carrying_furniture == null: 
+			#interacting_furniture.rotation_degrees.y += 90
 
 
 func handle_movement(delta : float) -> void:

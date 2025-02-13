@@ -1,7 +1,6 @@
 class_name RoomBuilder
 extends Node3D
 
-
 var money := 1000
 var furniture := preload("res://furniture/furniture.tscn") as PackedScene
 
@@ -23,13 +22,13 @@ func _ready() -> void:
 			child.toggle_collision(true)
 		
 		
-func _on_character_furniture_placed(furniture_placed: Furniture, position_placed: Vector3) -> void:
+func _on_character_furniture_placed(furniture_placed: Furniture, tile_placed_on: Tile) -> void:
 	var new_furniture := furniture.instantiate() as Furniture
 	new_furniture.furniture_type = furniture_placed.furniture_type
 	
 	add_child(new_furniture)
-	new_furniture.global_position.x = position_placed.x + 5
-	new_furniture.global_position.z = position_placed.z + 5
+	new_furniture.global_position = tile_placed_on.furniture_marker.global_position
+	tile_placed_on.furniture_on_tile = new_furniture
 	
 	placed_furnitures.append(new_furniture)
 

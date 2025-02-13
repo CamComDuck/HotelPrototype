@@ -147,48 +147,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67452, 0)
 [node name="Tile2" parent="Tiles" instance=ExtResource("10_l3nbf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675, 10)
 
-[node name="Tile3" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.67452, 0)
-
-[node name="Tile4" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.675, 10)
-
-[node name="Tile5" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.67452, 0)
-
-[node name="Tile6" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.675, 10)
-
-[node name="Tile7" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.67452, 0)
-
-[node name="Tile8" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.675, 10)
-
-[node name="Tile9" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67452, -20)
-
-[node name="Tile10" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675, -10)
-
-[node name="Tile11" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.67452, -20)
-
-[node name="Tile12" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.675, -10)
-
-[node name="Tile13" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.67452, -20)
-
-[node name="Tile14" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.675, -10)
-
-[node name="Tile15" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.67452, -20)
-
-[node name="Tile16" parent="Tiles" instance=ExtResource("10_l3nbf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.675, -10)
-
 [connection signal="deleting_furniture" from="Character" to="." method="_on_character_deleting_furniture"]
 [connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
 [connection signal="body_entered" from="PurchaseBathroom" to="." method="_on_purchase_square_body_entered"]
