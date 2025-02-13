@@ -6,6 +6,8 @@ var furniture := preload("res://furniture/furniture.tscn") as PackedScene
 
 var placed_furnitures : Array[Furniture]
 
+@export var all_tiles : Array[Tile]
+
 @onready var purchase_bathroom: Area3D = $PurchaseBathroom
 @onready var bathroom_furnitures: Area3D = $BathroomFurnitures
 @onready var bthroom_purchase_collider: CollisionShape3D = %BthroomPurchaseCollider
@@ -21,7 +23,28 @@ func _ready() -> void:
 		if child is Furniture:
 			child.toggle_collision(true)
 		
-		
+
+func check_furniture_placement_validity(furniture_placed: Furniture, tile_placed_on: Tile) -> bool:
+	if furniture_placed.furniture_type.tiles_width > 1 or furniture_placed.furniture_type.tiles_length > 1:
+		for i in all_tiles.size():
+			if all_tiles[i] == tile_placed_on:
+				if furniture_placed.furniture_type.tiles_width > 1 and i % 4 >= 3:
+					return false
+				elif furniture_placed.furniture_type.tiles_width > 1 and all_tiles[i + 1].furniture_on_tile != null:
+					return false
+				
+				if i <= 3 and furniture_placed.furniture_type.tiles_length > 1:
+					return false
+				elif i <= 7 and furniture_placed.furniture_type.tiles_length > 2:
+					return false
+				elif i <= 11 and furniture_placed.furniture_type.tiles_length > 3:
+					return false
+				elif furniture_placed.furniture_type.tiles_length > 1 and all_tiles[i - 4].furniture_on_tile != null:
+					return false
+			
+	return true
+
+
 func _on_character_furniture_placed(furniture_placed: Furniture, tile_placed_on: Tile) -> void:
 	var new_furniture := furniture.instantiate() as Furniture
 	new_furniture.furniture_type = furniture_placed.furniture_type
@@ -29,6 +52,14 @@ func _on_character_furniture_placed(furniture_placed: Furniture, tile_placed_on:
 	add_child(new_furniture)
 	new_furniture.global_position = tile_placed_on.furniture_marker.global_position
 	tile_placed_on.furniture_on_tile = new_furniture
+	
+	if new_furniture.furniture_type.tiles_width > 1 or new_furniture.furniture_type.tiles_length:
+		for i in all_tiles.size():
+			if all_tiles[i] == tile_placed_on:
+				if new_furniture.furniture_type.tiles_width > 1:
+					all_tiles[i + 1].furniture_on_tile = new_furniture
+				if new_furniture.furniture_type.tiles_length > 1:
+					all_tiles[i - 4].furniture_on_tile = new_furniture
 	
 	placed_furnitures.append(new_furniture)
 

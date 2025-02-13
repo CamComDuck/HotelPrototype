@@ -9,4 +9,4 @@ category = "Bathroom"
 price = 350
 model_path = "res://Furniture Kit/bathtub.fbx"
 tiles_length = 1
-tiles_width = 3
+tiles_width = 2

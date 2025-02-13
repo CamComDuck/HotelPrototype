@@ -18,7 +18,10 @@ func _ready() -> void:
 	price_label.text = "$" + str(furniture_type.price)
 	
 	collision_shape.shape = BoxShape3D.new()
-	collision_shape.shape.size = Vector3(GameInfo.tile_size * furniture_type.tiles_width, GameInfo.tile_size, GameInfo.tile_size * furniture_type.tiles_length)
+	collision_shape.shape.size = Vector3(
+		GameInfo.tile_size * furniture_type.tiles_width * 1.5,
+		GameInfo.tile_size,
+		GameInfo.tile_size * furniture_type.tiles_length * 1.5)
 	
 	rotation_degrees.y = 180
 	

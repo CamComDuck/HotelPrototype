@@ -12,7 +12,3 @@ func _ready() -> void:
 
 func toggle_indicator(is_visible_now : bool) -> void:
 	indicator.visible = is_visible_now
-
-
-func _physics_process(delta: float) -> void:
-	print(furniture_on_tile)

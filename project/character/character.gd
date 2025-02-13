@@ -23,16 +23,19 @@ func _physics_process(delta: float) -> void:
 		handle_movement(delta)
 
 	if shape_cast.is_colliding():
-		if shape_cast.get_collider(0) is Furniture:
-			interacting_furniture = shape_cast.get_collider(0)
-		elif shape_cast.get_collider(0) is Tile:
-			if shape_cast.get_collider(0).furniture_on_tile == null:
-				if current_tile != shape_cast.get_collider(0) and current_tile != null:
-					current_tile.toggle_indicator(false)
-				current_tile = shape_cast.get_collider(0)
-				current_tile.toggle_indicator(true)
-			elif shape_cast.get_collider(0).furniture_on_tile != null:
-				interacting_furniture = shape_cast.get_collider(0).furniture_on_tile
+		for i in shape_cast.get_collision_count():
+			if shape_cast.get_collider(i) is Furniture:
+				interacting_furniture = shape_cast.get_collider(i)
+			elif shape_cast.get_collider(i) is Tile:
+				if shape_cast.get_collider(i).furniture_on_tile == null:
+					if current_tile != shape_cast.get_collider(i) and current_tile != null:
+						current_tile.toggle_indicator(false)
+					current_tile = shape_cast.get_collider(i)
+					current_tile.toggle_indicator(true)
+				elif shape_cast.get_collider(i).furniture_on_tile != null:
+					interacting_furniture = shape_cast.get_collider(i).furniture_on_tile
+				
+
 	else:
 		interacting_furniture = null
 		if current_tile != null:
@@ -66,16 +69,18 @@ func _physics_process(delta: float) -> void:
 			interacting_furniture = null
 
 		elif carrying_marker.get_child_count() > 0 and current_tile != null:
-			figurine.play_animation("pick-up")
-			allow_movement = false
-			await figurine.animation_finished
-			place_sound.play()
+			if current_tile.furniture_on_tile == null:
+				if get_parent().check_furniture_placement_validity(carrying_furniture, current_tile):
+					figurine.play_animation("pick-up")
+					allow_movement = false
+					await figurine.animation_finished
+					place_sound.play()
 
-			# Put furniture down
-			furniture_placed.emit(carrying_furniture, current_tile)
-			carrying_marker.get_child(0).queue_free()
-			allow_movement = true
-			carrying_furniture = null
+					# Put furniture down
+					furniture_placed.emit(carrying_furniture, current_tile)
+					carrying_marker.get_child(0).queue_free()
+					allow_movement = true
+					carrying_furniture = null
 
 	#elif Input.is_action_just_pressed("interact_secondary"):
 		#if interacting_furniture != null and carrying_furniture == null: 
