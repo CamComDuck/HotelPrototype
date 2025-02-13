@@ -1,16 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=16 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
 [ext_resource type="Script" path="res://room_builder/room_builder.gd" id="1_rgx25"]
 [ext_resource type="PackedScene" uid="uid://dgcbkyv1gcac2" path="res://character/character.tscn" id="2_momfj"]
 [ext_resource type="PackedScene" uid="uid://8s2306vmkwf5" path="res://furniture/furniture.tscn" id="3_sdbeq"]
 [ext_resource type="Resource" uid="uid://cost0hs1vnhik" path="res://furniture/types/toilet.tres" id="4_rm1gh"]
-[ext_resource type="Resource" uid="uid://xhl1av4slyvw" path="res://furniture/types/bed_double.tres" id="5_738do"]
 [ext_resource type="Resource" uid="uid://cieulahri8b0c" path="res://furniture/types/shower.tres" id="5_vgsup"]
-[ext_resource type="Resource" uid="uid://dmm40jphkq622" path="res://furniture/types/bed_bunk.tres" id="6_im1rv"]
-[ext_resource type="Resource" uid="uid://dvko1y2ccg36a" path="res://furniture/types/chair_desk.tres" id="7_0ehly"]
 [ext_resource type="Resource" uid="uid://osi403f6j0oo" path="res://furniture/types/bathtub.tres" id="7_p7hpa"]
-[ext_resource type="Resource" uid="uid://bhcx8h1lxlpld" path="res://furniture/types/lamp_floor.tres" id="8_lgmat"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,8 +24,17 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_bqaj3"]
 size = Vector3(120, 1, 145)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gf1pd"]
+size = Vector3(20, 1.5, 20)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_my12k"]
-size = Vector3(26.6572, 2.62109, 21.8628)
+size = Vector3(100, 1.5, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mumeo"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7xc80"]
+size = Vector3(20, 0.5, 20)
 
 [node name="RoomBuilder" type="Node3D"]
 script = ExtResource("1_rgx25")
@@ -49,50 +54,78 @@ transform = Transform3D(11.5, 0, 0, 0, 1, 0, 0, 0, 11.5, 60, 0, -70)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_bqaj3")
 
-[node name="Character" parent="." groups=["player"] instance=ExtResource("2_momfj")]
+[node name="Character" parent="." instance=ExtResource("2_momfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79735, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.592013, 0.805928, 0, -0.805928, 0.592013, 2.5, 50, 49.895)
 
-[node name="Furniture" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9711, 1.36692, 35.4119)
-furniture_type = ExtResource("4_rm1gh")
+[node name="PurchaseBathroom" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.704, 0, 38.3542)
 
-[node name="Furniture7" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7602, 1.36692, 36.6303)
-furniture_type = ExtResource("5_vgsup")
+[node name="BthroomPurchaseCollider" type="CollisionShape3D" parent="PurchaseBathroom"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225006, 0.810547, -6.16626)
+shape = SubResource("BoxShape3D_gf1pd")
 
-[node name="Furniture2" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5145, 1.36692, 36.9325)
-furniture_type = ExtResource("5_738do")
+[node name="CSGBox3D" type="CSGBox3D" parent="PurchaseBathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275818, 0.071228, -7.22372)
+size = Vector3(20, 1.142, 20)
 
-[node name="Furniture3" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.72189, 1.36692, 36.7218)
-furniture_type = ExtResource("6_im1rv")
+[node name="Label" type="Label3D" parent="PurchaseBathroom"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53558, 3.85835, -5.77318)
+billboard = 1
+text = "Bathroom"
+font_size = 600
+outline_size = 127
 
-[node name="Furniture6" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.5884, 1.36692, 35.9893)
-furniture_type = ExtResource("7_p7hpa")
+[node name="BathroomFurnitures" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25391, 0, 38.3542)
 
-[node name="Furniture4" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3783, 1.36692, 36.8734)
-furniture_type = ExtResource("7_0ehly")
-
-[node name="Furniture5" parent="." instance=ExtResource("3_sdbeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00014, 1.36692, 35.3144)
-furniture_type = ExtResource("8_lgmat")
-
-[node name="PurchaseSquare" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5044, 0, 39.0772)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PurchaseSquare"]
+[node name="BthroomFurnituresCollider" type="CollisionShape3D" parent="BathroomFurnitures"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225006, 0.810547, -6.16626)
 shape = SubResource("BoxShape3D_my12k")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="PurchaseSquare"]
+[node name="CSGBox3D" type="CSGBox3D" parent="BathroomFurnitures"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275818, 0.071228, -7.22372)
-size = Vector3(27.5741, 1.14246, 24.0253)
+size = Vector3(100, 1.142, 20)
+material = SubResource("StandardMaterial3D_mumeo")
+
+[node name="Furniture" parent="BathroomFurnitures" instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2254, 0, -6.47266)
+furniture_type = ExtResource("7_p7hpa")
+
+[node name="Furniture2" parent="BathroomFurnitures" instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54666, 0, -6.47266)
+furniture_type = ExtResource("5_vgsup")
+
+[node name="Furniture3" parent="BathroomFurnitures" instance=ExtResource("3_sdbeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3976, 0, -6.47266)
+furniture_type = ExtResource("4_rm1gh")
+
+[node name="PurchaseFurnitures" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7029, 1, -3.47564)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PurchaseFurnitures"]
+size = Vector3(20, 1, 20)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PurchaseFurnitures"]
+shape = SubResource("BoxShape3D_7xc80")
+
+[node name="Label2" type="Label3D" parent="PurchaseFurnitures"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+billboard = 1
+text = "Purchase
+All
+Furnitures
+Placed"
+font_size = 600
+outline_size = 127
 
 [connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
-[connection signal="body_entered" from="PurchaseSquare" to="." method="_on_purchase_square_body_entered"]
+[connection signal="body_entered" from="PurchaseBathroom" to="." method="_on_purchase_square_body_entered"]
+[connection signal="body_exited" from="BathroomFurnitures" to="." method="_on_purchase_bathroom_body_exited"]
+[connection signal="body_entered" from="PurchaseFurnitures" to="." method="_on_purchase_furnitures_body_entered"]

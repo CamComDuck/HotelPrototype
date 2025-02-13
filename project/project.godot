@@ -34,10 +34,6 @@ folder_colors={
 "res://room_builder/": "orange"
 }
 
-[global_group]
-
-player=""
-
 [input]
 
 ui_accept={

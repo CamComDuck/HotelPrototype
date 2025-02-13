@@ -29,3 +29,7 @@ func _ready() -> void:
 	#price_label.position.z = (-1 * collision_shape.shape.size.z) + (collision_shape.shape.size.z / 2.0)
 	price_label.position.z = -3
 	price_label.position.y = collision_shape.shape.size.y / 2.0
+
+
+func toggle_collision(is_disabled : bool) -> void:
+	collision_shape.disabled = is_disabled

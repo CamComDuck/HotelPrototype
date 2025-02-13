@@ -9,7 +9,6 @@ var interacting_furniture : Furniture
 var carrying_furniture : FurnitureType
 var last_direction : Vector3
 var allow_movement := true
-var money: int = 1000  # Starting money
 
 @onready var figurine := %Figurine as Figurine
 @onready var carrying_marker := %CarryingMarker as Marker3D
@@ -27,27 +26,21 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("interact_primary"):
 		if interacting_furniture != null and carrying_furniture == null: 
-			# Getting price from .tres
-			var furniture_price = interacting_furniture.furniture_type.price
 
-			 # Deduct money if affordable
-			if spend_money(furniture_price):
-				figurine.play_animation("pick-up")
-				allow_movement = false
-				await figurine.animation_finished
+			figurine.play_animation("pick-up")
+			allow_movement = false
+			await figurine.animation_finished
 
-				# Pick up furniture
-				allow_movement = true
-				var hand_model := interacting_furniture.model.duplicate()
-				hand_model.scale = Vector3(0.5, 0.5, 0.5)
-				carrying_marker.add_child(hand_model)
-				figurine.play_animation("holding-both")
+			# Pick up furniture
+			allow_movement = true
+			var hand_model := interacting_furniture.model.duplicate()
+			hand_model.scale = Vector3(0.5, 0.5, 0.5)
+			carrying_marker.add_child(hand_model)
+			figurine.play_animation("holding-both")
 
-				carrying_furniture = interacting_furniture.furniture_type
-				interacting_furniture.queue_free()
-				interacting_furniture = null
-			else:
-				print("Not enough money to purchase this furniture!")
+			carrying_furniture = interacting_furniture.furniture_type
+			interacting_furniture.queue_free()
+			interacting_furniture = null
 
 		elif carrying_marker.get_child_count() > 0:
 			figurine.play_animation("pick-up")
@@ -55,7 +48,6 @@ func _physics_process(delta: float) -> void:
 			await figurine.animation_finished
 
 			# Put furniture down
-			carrying_furniture.price = 0
 			furniture_placed.emit(carrying_furniture, global_position)
 			carrying_marker.get_child(0).queue_free()
 			allow_movement = true
@@ -65,15 +57,6 @@ func _physics_process(delta: float) -> void:
 		if interacting_furniture != null and carrying_furniture == null: 
 			interacting_furniture.rotation_degrees.y += 90
 
-func spend_money(amount: int) -> bool:
-	""" Deducts money if the player has enough. Returns true if successful. """
-	if money >= amount:
-		money -= amount
-		print("Purchased! Remaining money:", money)
-		return true
-	else:
-		print("Not enough money!")
-		return false
 
 func handle_movement(delta : float) -> void:
 	# Add the gravity.
