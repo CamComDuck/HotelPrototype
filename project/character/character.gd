@@ -14,6 +14,8 @@ var allow_movement := true
 @onready var figurine := %Figurine as Figurine
 @onready var carrying_marker := %CarryingMarker as Marker3D
 @onready var shape_cast := %ShapeCast as ShapeCast3D
+@onready var pickup_sound := $PickUpSound
+@onready var place_sound := $PlaceSound
 
 func _physics_process(delta: float) -> void:
 	if allow_movement:
@@ -31,6 +33,7 @@ func _physics_process(delta: float) -> void:
 			figurine.play_animation("pick-up")
 			allow_movement = false
 			await figurine.animation_finished
+			pickup_sound.play()
 
 			# Pick up furniture
 			allow_movement = true
@@ -44,7 +47,6 @@ func _physics_process(delta: float) -> void:
 			if not interacting_furniture.is_infinite:
 				deleting_furniture.emit(interacting_furniture)
 				interacting_furniture.queue_free()
-				
 			carrying_furniture.is_infinite = false
 			interacting_furniture = null
 
@@ -52,6 +54,7 @@ func _physics_process(delta: float) -> void:
 			figurine.play_animation("pick-up")
 			allow_movement = false
 			await figurine.animation_finished
+			place_sound.play()
 
 			# Put furniture down
 			furniture_placed.emit(carrying_furniture, global_position)

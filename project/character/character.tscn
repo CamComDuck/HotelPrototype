@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgcbkyv1gcac2"]
+[gd_scene load_steps=7 format=3 uid="uid://dgcbkyv1gcac2"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_koq2w"]
 [ext_resource type="PackedScene" uid="uid://5jhrsea16t41" path="res://character/figurine.tscn" id="2_asmi4"]
+[ext_resource type="AudioStream" uid="uid://cwr5ef73vu6fm" path="res://sounds/pickup/ping.wav" id="3_x764o"]
+[ext_resource type="AudioStream" uid="uid://f2ual0qcmjx5" path="res://sounds/place/pop.wav" id="4_npycy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hatge"]
 radius = 2.0
@@ -34,3 +36,13 @@ shape = SubResource("CapsuleShape3D_2pw6n")
 target_position = Vector3(0, 0, 0)
 max_results = 1
 debug_shape_custom_color = Color(0.929412, 0.988235, 0, 1)
+
+[node name="PickUpSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_x764o")
+volume_db = 10.0
+max_db = 6.0
+
+[node name="PlaceSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_npycy")
+volume_db = 5.0
+max_db = 5.0
