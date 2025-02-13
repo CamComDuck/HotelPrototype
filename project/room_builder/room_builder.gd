@@ -23,9 +23,9 @@ func _ready() -> void:
 			child.toggle_collision(true)
 		
 		
-func _on_character_furniture_placed(furniture_placed: FurnitureType, position_placed: Vector3) -> void:
+func _on_character_furniture_placed(furniture_placed: Furniture, position_placed: Vector3) -> void:
 	var new_furniture := furniture.instantiate() as Furniture
-	new_furniture.furniture_type = furniture_placed
+	new_furniture.furniture_type = furniture_placed.furniture_type
 	
 	add_child(new_furniture)
 	new_furniture.global_position.x = position_placed.x + 5
@@ -76,3 +76,7 @@ func _on_purchase_furnitures_body_entered(body: Node3D) -> void:
 		else:
 			print("No furniture items to buy")
 		
+
+
+func _on_character_deleting_furniture(furniture_deleted: Furniture) -> void:
+	placed_furnitures.erase(furniture_deleted)

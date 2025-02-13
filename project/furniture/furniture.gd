@@ -2,6 +2,7 @@ class_name Furniture
 extends StaticBody3D
 
 @export var furniture_type : FurnitureType
+@export var is_infinite := false
 
 var model : Node3D
 

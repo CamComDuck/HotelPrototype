@@ -1,12 +1,13 @@
 class_name Character
 extends CharacterBody3D
 
-signal furniture_placed (furniture_placed : FurnitureType, position_placed : Vector3)
+signal furniture_placed (furniture_placed : Furniture, position_placed : Vector3)
+signal deleting_furniture (furniture_deleted : Furniture)
 
 const SPEED := 20.0
 
 var interacting_furniture : Furniture
-var carrying_furniture : FurnitureType
+var carrying_furniture : Furniture
 var last_direction : Vector3
 var allow_movement := true
 
@@ -38,8 +39,13 @@ func _physics_process(delta: float) -> void:
 			carrying_marker.add_child(hand_model)
 			figurine.play_animation("holding-both")
 
-			carrying_furniture = interacting_furniture.furniture_type
-			interacting_furniture.queue_free()
+			carrying_furniture = interacting_furniture.duplicate()
+			
+			if not interacting_furniture.is_infinite:
+				deleting_furniture.emit(interacting_furniture)
+				interacting_furniture.queue_free()
+				
+			carrying_furniture.is_infinite = false
 			interacting_furniture = null
 
 		elif carrying_marker.get_child_count() > 0:

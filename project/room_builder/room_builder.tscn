@@ -96,14 +96,17 @@ material = SubResource("StandardMaterial3D_mumeo")
 [node name="Furniture" parent="BathroomFurnitures" instance=ExtResource("3_sdbeq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2254, 0, -6.47266)
 furniture_type = ExtResource("7_p7hpa")
+is_infinite = true
 
 [node name="Furniture2" parent="BathroomFurnitures" instance=ExtResource("3_sdbeq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54666, 0, -6.47266)
 furniture_type = ExtResource("5_vgsup")
+is_infinite = true
 
 [node name="Furniture3" parent="BathroomFurnitures" instance=ExtResource("3_sdbeq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3976, 0, -6.47266)
 furniture_type = ExtResource("4_rm1gh")
+is_infinite = true
 
 [node name="PurchaseFurnitures" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7029, 1, -3.47564)
@@ -125,6 +128,7 @@ Placed"
 font_size = 600
 outline_size = 127
 
+[connection signal="deleting_furniture" from="Character" to="." method="_on_character_deleting_furniture"]
 [connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
 [connection signal="body_entered" from="PurchaseBathroom" to="." method="_on_purchase_square_body_entered"]
 [connection signal="body_exited" from="BathroomFurnitures" to="." method="_on_purchase_bathroom_body_exited"]
