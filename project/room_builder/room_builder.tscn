@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=17 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
 [ext_resource type="Script" path="res://room_builder/room_builder.gd" id="1_rgx25"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://cost0hs1vnhik" path="res://furniture/types/toilet.tres" id="4_rm1gh"]
 [ext_resource type="Resource" uid="uid://cieulahri8b0c" path="res://furniture/types/shower.tres" id="5_vgsup"]
 [ext_resource type="Resource" uid="uid://osi403f6j0oo" path="res://furniture/types/bathtub.tres" id="7_p7hpa"]
+[ext_resource type="AudioStream" uid="uid://dpn41ia4c0xjh" path="res://music/Casual - Store (Loop_01).wav" id="8_edarg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -127,6 +128,11 @@ Furnitures
 Placed"
 font_size = 600
 outline_size = 127
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_edarg")
+volume_db = -2.5
+autoplay = true
 
 [connection signal="deleting_furniture" from="Character" to="." method="_on_character_deleting_furniture"]
 [connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
