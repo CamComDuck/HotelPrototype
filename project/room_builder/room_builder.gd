@@ -28,6 +28,7 @@ func check_furniture_placement_validity(furniture_placed: Furniture, tile_placed
 	if furniture_placed.furniture_type.tiles_width > 1 or furniture_placed.furniture_type.tiles_length > 1:
 		for i in all_tiles.size():
 			if all_tiles[i] == tile_placed_on:
+				
 				if furniture_placed.furniture_type.tiles_width > 1 and i % 4 >= 3:
 					return false
 				elif furniture_placed.furniture_type.tiles_width > 1 and all_tiles[i + 1].furniture_on_tile != null:
@@ -111,6 +112,9 @@ func _on_purchase_furnitures_body_entered(body: Node3D) -> void:
 
 func _on_character_deleting_furniture(furniture_deleted: Furniture) -> void:
 	placed_furnitures.erase(furniture_deleted)
+	for i in all_tiles.size():
+		if all_tiles[i].furniture_on_tile == furniture_deleted:
+			all_tiles[i].furniture_on_tile = null
 
 
 func _on_background_music_finished() -> void:
