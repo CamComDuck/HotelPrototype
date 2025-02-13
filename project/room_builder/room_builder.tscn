@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bbw1tk7vh0mdi"]
+[gd_scene load_steps=22 format=3 uid="uid://bbw1tk7vh0mdi"]
 
 [ext_resource type="PackedScene" uid="uid://b32me7mavfh1q" path="res://Furniture Kit/floorFull.fbx" id="1_2stwj"]
 [ext_resource type="Script" path="res://room_builder/room_builder.gd" id="1_rgx25"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dpn41ia4c0xjh" path="res://music/Casual - Store (Loop_01).wav" id="8_edarg"]
 [ext_resource type="AudioStream" uid="uid://c2dix1qes0vmp" path="res://sounds/purchase/coins.wav" id="8_o6cl5"]
 [ext_resource type="PackedScene" uid="uid://dpvgdt2vvt7el" path="res://room_builder/tile.tscn" id="10_l3nbf"]
+[ext_resource type="Script" path="res://room_builder/canvas_layer.gd" id="12_q7w28"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2odo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -39,6 +40,12 @@ albedo_color = Color(0, 1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7xc80"]
 size = Vector3(20, 0.5, 20)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i1smr"]
+font_size = 41
+font_color = Color(0.498039, 1, 0.309804, 1)
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 0.764706)
 
 [node name="RoomBuilder" type="Node3D" node_paths=PackedStringArray("all_tiles")]
 script = ExtResource("1_rgx25")
@@ -195,6 +202,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.675, 10)
 
 [node name="Tile8" parent="Tiles" instance=ExtResource("10_l3nbf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.675, 10)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("12_q7w28")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 7.0
+offset_right = 400.0
+offset_bottom = 64.0
+text = "Money: "
+label_settings = SubResource("LabelSettings_i1smr")
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 6.0
+offset_right = 251.0
+offset_bottom = 63.0
+text = "Money: "
+label_settings = SubResource("LabelSettings_i1smr")
 
 [connection signal="deleting_furniture" from="Character" to="." method="_on_character_deleting_furniture"]
 [connection signal="furniture_placed" from="Character" to="." method="_on_character_furniture_placed"]
